@@ -9,8 +9,7 @@ Please feel free to exlore `examples/` directory for stepping stones and inspira
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install pioneer_sdk.
 
 ```bash
-python3 -m pip install pioneer_sdk or
-python3 -m pip install git+https://github.com/geoscan/pioneer_sdk.git@master
+pip install git+https://github.com/OnisOris/pioneer_sdk
 ```
 ## Usage
 
