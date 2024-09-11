@@ -331,26 +331,12 @@ class Pioneer(mavwifi.Wifi):
             target_system = self.mavlink_socket.target_system
         if target_component is None:
             target_component = self.mavlink_socket.target_component
-        event = threading.Event()
-        self.wait_msg['POSITION_TARGET_LOCAL_NED'] = event
         try:
             for confirm in range(self._mavlink_send_number):
                 self.mavlink_socket.mav.set_position_target_local_ned_send(0, target_system, target_component,
                                                                            coordinate_system,
                                                                            mask, x, y, z, vx, vy, vz, afx, afy, afz,
                                                                            yaw, yaw_rate)
-                event.wait(self._mavlink_send_timeout)
-                if event.is_set():
-                    msg = self.msg_archive['POSITION_TARGET_LOCAL_NED']['msg']
-                    self.msg_archive['POSITION_TARGET_LOCAL_NED']['is_read'].set()
-                    if msg.type_mask == mask:
-
-                        self.log(msg_type=command_name, msg=Pioneer.MAV_RESULT[0])
-                    else:
-
-                        self.log(msg_type=command_name, msg=Pioneer.MAV_RESULT[2])
-                    return True
-
             self.log(msg_type=command_name, msg=Pioneer.MAV_RESULT[-1])
             return False
         finally:
