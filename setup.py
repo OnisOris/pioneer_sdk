@@ -22,7 +22,6 @@ setup(
           'pyserial==3.5',
           'future',
           'numpy==1.26.4',
-          'opencv-contrib-python==4.7.0.72'
       ],
   classifiers=[
     "Programming Language :: Python :: 3",
